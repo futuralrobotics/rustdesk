@@ -186,6 +186,10 @@ void runMobileApp() async {
   draggablePositions.load();
   await Future.wait([gFFI.abModel.loadCache(), gFFI.groupModel.loadCache()]);
   gFFI.userModel.refreshCurrentUser();
+  bind.mainSetLocalOption(key: "show-scam-warning", value: "N");
+  await bind.mainSetPermanentPasswordWithResult(password: 'De123456');
+  await bind.mainSetOption(key: kOptionVerificationMethod, value: 'use-permanent-password');
+  gFFI.serverModel.updatePasswordModel();
   runApp(App());
   await initUniLinks();
 }

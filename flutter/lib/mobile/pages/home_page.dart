@@ -25,8 +25,8 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  var _selectedIndex = 0;
-  int get selectedIndex => _selectedIndex;
+  var _selectedIndex = 2;
+  int get selectedIndex => ;
   final List<PageShape> _pages = [];
   int _chatPageTabIndex = -1;
   bool get isChatPageCurrentTab => isAndroid
@@ -65,7 +65,7 @@ class HomePageState extends State<HomePage> {
         onWillPop: () async {
           if (_selectedIndex != 0) {
             setState(() {
-              _selectedIndex = 0;
+              _selectedIndex = 2;
             });
           } else {
             return true;

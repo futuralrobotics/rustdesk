@@ -439,6 +439,17 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
           ANDROID_NDK_ROOT: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
+          # 设置核心环境变量（和 Windows 版作用完全相同）
+          export RENDEZVOUS_SERVER="${{ secrets.RENDEZVOUS_SERVER }}"
+          export RS_PUB_KEY="${{ secrets.RS_PUB_KEY }}"
+          # 校验 RENDEZVOUS_SERVER 是否配置成功
+          if [ -n "$RENDEZVOUS_SERVER" ]; then
+            echo "✓ RENDEZVOUS_SERVER is set (length: ${#RENDEZVOUS_SERVER} characters)"
+            echo "  First character: ${RENDEZVOUS_SERVER:0:1}"
+            echo "  Last character: ${RENDEZVOUS_SERVER: -1}"
+          else
+            echo "✗ RENDEZVOUS_SERVER is NOT set or empty"
+          fi
           rustup target add ${{ matrix.job.target }}
           cargo install cargo-ndk --version ${{ env.CARGO_NDK_VERSION }} --locked
           case ${{ matrix.job.target }} in

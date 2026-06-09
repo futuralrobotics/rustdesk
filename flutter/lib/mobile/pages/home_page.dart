@@ -78,7 +78,10 @@ class HomePageState extends State<HomePage> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.of(context).pop();
+                if (gFFI.serverModel.isStart) {
+                  gFFI.serverModel.stopService();
+                }
+                SystemNavigator.pop();
               },
             ),
             centerTitle: true,
